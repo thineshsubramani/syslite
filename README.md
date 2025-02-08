@@ -43,3 +43,5 @@ You can install **`go-syslite`** using Go modules:
 ```bash
 go get github.com/thineshsubramani/go-syslite
 ```
+
+## Contact
