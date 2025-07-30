@@ -2,7 +2,6 @@ package syslite
 
 import (
 	"bufio"
-	"fmt"
 	"os"
 	"os/exec"
 	"strings"
@@ -66,26 +65,4 @@ func IsDistro(targetIDs ...string) bool {
 	}
 
 	return false
-}
-
-func printHelp() {
-	fmt.Println("Available checks:")
-	fmt.Println("  isLinux")
-	fmt.Println("  isWindows")
-	fmt.Println("  isDarwin")
-	fmt.Println("  isARM64")
-	fmt.Println("  isAMD64")
-	fmt.Println("  Isx86_64")
-	fmt.Println("  is386")
-	fmt.Println("  isARM")
-	fmt.Println("  isPPC64")
-	fmt.Println("  isMIPS")
-	fmt.Println("  isDebian")
-	fmt.Println("  isUbuntu")
-	fmt.Println("  isFedora")
-	fmt.Println("  isCentOS")
-	fmt.Println("  isRHEL")
-	fmt.Println("  isArch")
-	fmt.Println("  isAlpine")
-	fmt.Println("  isOpenSUSE")
 }
