@@ -6,14 +6,16 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+type OutputConfig struct {
+	Formats   []string `yaml:"formats"`
+	JSONPath  string   `yaml:"json_path"`
+	YAMLPath  string   `yaml:"yaml_path"`
+	EnvTarget string   `yaml:"env_target"`
+}
+
 type Config struct {
-	Extract []string `yaml:"extract"`
-	Output  struct {
-		Formats   []string `yaml:"formats"`
-		JSONPath  string   `yaml:"json_path"`
-		YAMLPath  string   `yaml:"yaml_path"`
-		EnvTarget string   `yaml:"env_target"`
-	} `yaml:"output"`
+	Extract []string     `yaml:"extract"`
+	Output  OutputConfig `yaml:"output"`
 }
 
 func LoadConfig(path string) (*Config, error) {
@@ -24,10 +26,9 @@ func LoadConfig(path string) (*Config, error) {
 	defer f.Close()
 
 	var cfg Config
-	decoder := yaml.NewDecoder(f)
-	err = decoder.Decode(&cfg)
-	if err != nil {
+	if err := yaml.NewDecoder(f).Decode(&cfg); err != nil {
 		return nil, err
 	}
+
 	return &cfg, nil
 }

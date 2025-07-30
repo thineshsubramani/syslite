@@ -14,6 +14,7 @@ func main() {
 		log.Fatalf("failed to load config: %v", err)
 	}
 
+	// ONLY pass the slice of strings, not the whole config
 	data := extract.CollectAll(cfg.Extract)
 
 	for _, format := range cfg.Output.Formats {
@@ -21,11 +22,9 @@ func main() {
 		case "json":
 			outputs.ToJSON(data, cfg.Output.JSONPath)
 		case "yaml":
-			// implement ToYAML later
+			// outputs.ToYAML(data, cfg.Output.YAMLPath)
 		case "env":
 			outputs.ToEnv(data, cfg.Output.EnvTarget)
-		default:
-			log.Printf("unsupported format: %s", format)
 		}
 	}
 }
