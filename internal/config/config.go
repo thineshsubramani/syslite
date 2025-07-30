@@ -3,19 +3,22 @@ package config
 import (
 	"os"
 
+	"github.com/thineshsubramani/syslite/outputs"
 	"gopkg.in/yaml.v3"
 )
-
-type OutputConfig struct {
-	Formats   []string `yaml:"formats"`
-	JSONPath  string   `yaml:"json_path"`
-	YAMLPath  string   `yaml:"yaml_path"`
-	EnvTarget string   `yaml:"env_target"`
-}
 
 type Config struct {
 	Extract []string     `yaml:"extract"`
 	Output  OutputConfig `yaml:"output"`
+}
+
+type OutputConfig struct {
+	Formats map[string]outputs.OutputFormat `yaml:"formats"`
+}
+
+type OutputFormat struct {
+	Path   string `yaml:"path"`
+	Stdout bool   `yaml:"stdout"`
 }
 
 func LoadConfig(path string) (*Config, error) {

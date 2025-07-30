@@ -1,0 +1,6 @@
+HOSTNAME: mocked_HOSTNAME_value
+IP: mocked_IP_value
+arch: amd64
+distro: Ubuntu 24.04.1 LTS
+host: insight-development-lab
+os: linux

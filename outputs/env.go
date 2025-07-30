@@ -3,20 +3,20 @@ package outputs
 import (
 	"fmt"
 	"os"
+	"strings"
 )
 
-func ToEnv(data map[string]interface{}, targetPath string) error {
-	f, err := os.Create(targetPath)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-
+func writeENV(data map[string]interface{}, path string) error {
+	var builder strings.Builder
 	for k, v := range data {
-		_, err := fmt.Fprintf(f, "export %s=%v\n", k, v)
-		if err != nil {
-			return err
-		}
+		builder.WriteString(fmt.Sprintf("%s=%v\n", strings.ToUpper(k), v))
+	}
+	return os.WriteFile(path, []byte(builder.String()), 0644)
+}
+
+func printENV(data map[string]interface{}) error {
+	for k, v := range data {
+		fmt.Printf("%s=%v\n", strings.ToUpper(k), v)
 	}
 	return nil
 }

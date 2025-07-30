@@ -13,8 +13,11 @@ func CollectAll(keys []string) (map[string]interface{}, error) {
 			for k, v := range GetOS() {
 				result[k] = v
 			}
+		case "distro":
+			for k, v := range GetDistro() {
+				result[k] = v
+			}
 		default:
-			// You can replace this mock with real logic later
 			result[key] = fmt.Sprintf("mocked_%s_value", key)
 		}
 	}

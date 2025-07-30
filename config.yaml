@@ -2,11 +2,16 @@ extract:
   - HOSTNAME
   - os
   - IP
+  - distro
 
 output:
   formats:
-    - json
-    - env
-  json_path: output.json
-  yaml_path: output.yaml
-  env_target: .env
+    json:
+      path: test/output.json
+      stdout: true
+    yaml:
+      path: test/output.yaml
+      stdout: true
+    env:
+      path: test/.env
+      stdout: true

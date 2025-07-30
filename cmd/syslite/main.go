@@ -19,18 +19,7 @@ func main() {
 		log.Fatalf("failed to extract data: %v", err)
 	}
 
-	for _, format := range cfg.Output.Formats {
-		switch format {
-		case "json":
-			if err := outputs.ToJSON(data, cfg.Output.JSONPath); err != nil {
-				log.Printf("json output error: %v", err)
-			}
-		case "env":
-			if err := outputs.ToEnv(data, cfg.Output.EnvTarget); err != nil {
-				log.Printf("env output error: %v", err)
-			}
-		default:
-			log.Printf("unsupported format: %s", format)
-		}
+	if err := outputs.Render(data, cfg.Output.Formats); err != nil {
+		log.Fatalf("failed to render outputs: %v", err)
 	}
 }

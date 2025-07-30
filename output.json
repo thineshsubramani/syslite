@@ -1,7 +1,0 @@
-{
-  "HOSTNAME": "mocked_HOSTNAME_value",
-  "IP": "mocked_IP_value",
-  "arch": "amd64",
-  "host": "insight-development-lab",
-  "os": "linux"
-}
