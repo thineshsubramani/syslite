@@ -1,0 +1,13 @@
+extract:
+  - os
+  - kernel
+  - distro
+  - cpu
+  - memory
+
+output:
+  formats:
+    - json
+    - env
+  env_target: "GITHUB_ENV"   # shell, process, etc.
+  json_path: "./sysinfo.json"
