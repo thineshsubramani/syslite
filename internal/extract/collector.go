@@ -1,25 +1,23 @@
 package extract
 
 import (
-	"strings"
-
-	"github.com/thineshsubramani/syslite/internal/config"
+	"fmt"
 )
 
-func CollectAll(cfg config.Config) map[string]string {
-	result := make(map[string]string)
+func CollectAll(keys []string) (map[string]interface{}, error) {
+	result := make(map[string]interface{})
 
-	for _, section := range cfg.Extract {
-		switch strings.ToLower(section) {
+	for _, key := range keys {
+		switch key {
 		case "os":
 			for k, v := range GetOS() {
 				result[k] = v
 			}
-			// Add more later like:
-			// case "kernel":
-			// case "distro":
+		default:
+			// You can replace this mock with real logic later
+			result[key] = fmt.Sprintf("mocked_%s_value", key)
 		}
 	}
 
-	return result
+	return result, nil
 }

@@ -1,0 +1,12 @@
+extract:
+  - HOSTNAME
+  - os
+  - IP
+
+output:
+  formats:
+    - json
+    - env
+  json_path: output.json
+  yaml_path: output.yaml
+  env_target: .env
