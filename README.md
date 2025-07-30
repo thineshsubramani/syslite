@@ -4,6 +4,9 @@
 
 ---
 
+## Comments
+I'm converting this into single binary which works on cross platform to extract operating system information, return in yaml, json and string
+
 ## Why `go-syslite`?
 
 - **Lightweight & Fast**: A minimalistic library with zero dependencies, optimized for high performance and low memory usage.
