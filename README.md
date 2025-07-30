@@ -1,52 +1,88 @@
 # syslite
 
-**`syslite`** is a lightweight Go module designed to quickly retrieve essential system information with minimal overhead. This module is tailored for developers who need fast, simple, and intuitive functions to check system details such as OS name, distribution, kernel version, and architecture. With built-in Boolean functions, **`syslite`** simplifies cross-platform development and CI/CD pipeline tasks.
-
----
-
-## Comments
-I'm converting this into single binary which works on cross platform to extract operating system information, return in yaml, json and env.
-This binary will help to my other workflows (ansible, GHA) or code to make decision. 
-Eg. Running this binary as part of worklow where it help to get more info and inject into GITHUB ENV of current runtime which will be useful for next steps decission making (if ENV.KERNEL_VERSION == 3.X)
-
-## Why `go-syslite`?
-
-- **Lightweight & Fast**: A minimalistic library with zero dependencies, optimized for high performance and low memory usage.
-- **Cross-Platform Support**: Works seamlessly across Linux, Windows, macOS, and BSD systems.
-- **Simple Boolean Functions**: Quickly check system properties without parsing system files or dealing with complex logic.
-- **Optimized for CI/CD & Shell**: Use in CI pipelines, shell scripts, and other automated tools for efficient system detection.
-- **Extendable**: Easily extend or customize the module for your own use cases.
-
----
+Minimal system information extractor written in Go. (Trying my best to keep this lightweight)
+**Currently supports only YAML config-based execution.**
 
 ## Features
 
-- **System Information Retrieval**:
-  - `os_name`: Get the name of the operating system.
-  - `distro`: Detect Linux distributions.
-  - `kernel_version`: Retrieve the kernel version.
-  - `architecture`: Get the system architecture.
+* Extracts system data (based on configured fields)
+* Supports flexible output rendering
 
-- **Boolean Utility Functions**:
-  - `isLinux()`: Checks if the system is Linux.
-  - `isWindows()`: Checks if the system is Windows.
-  - `is64()`: Checks if the system is 64-bit.
-  - `isDebian()`: Checks if the system is a Debian-based Linux distro.
-  - `isUbuntu()`: Checks if the system is Ubuntu.
-  - `isCentOS()`: Checks if the system is CentOS.
-  - `isDarwin()`: Checks if the system is macOS.
-  - `isFreeBSD()`: Checks if the system is FreeBSD.
-  - `is86_64()`: Checks if the system architecture is x86_64.
-  - `isAMD64()`: Checks if the system architecture is AMD64.
+  * File output (`path`)
+  * Console output (`stdout`)
+* Easily extendable
 
 ---
 
-## Installation
+## Directory Structure
 
-You can install **`go-syslite`** using Go modules:
-
-```bash
-go get github.com/thineshsubramani/go-syslite
+```txt
+syslite/
+├── config/     # YAML config loader
+├── extract/    # Extract system data
+├── outputs/    # Output renderer
+└── main.go     # Entry point
 ```
 
-## Contact
+---
+
+## Sample `config.yaml`
+
+```yaml
+extract:
+  - hostname
+  - os
+  - distro
+
+output:
+  formats:
+    json:
+      path: "out/system.json"
+      stdout: true
+```
+
+---
+
+##  Run It
+
+### Step 1: Auto-inject env vars (Your binary)
+
+```yaml
+- name: Inject sys info
+  run: |
+    ./syslite  # injects into $GITHUB_ENV
+```
+
+---
+
+###  Step 2: Use injected vars
+
+```yaml
+- name: Use kernel info
+  run: |
+    echo "Kernel version: $KERNEL_VERSION"
+    if [[ "$KERNEL_MAJOR" == "6" ]]; then
+      echo "Modern Linux Kernel"
+    fi
+```
+
+---
+
+###  Example of what `syslite` injects
+
+```bash
+KERNEL_VERSION=6.8.0-xyz
+KERNEL_MAJOR=6
+HOSTNAME=ci-runner-07
+```
+
+---
+Boom. Any job after `syslite` now uses those injected env vars natively. Zero parsing. It can support any workflow (eg.Ansible runtime)
+
+---
+
+## Planned
+
+* Support CLI flags (e.g., `--format`, `--stdout`)
+* Auto-detect config location
+* Extend extractors (CPU, RAM, etc.)
