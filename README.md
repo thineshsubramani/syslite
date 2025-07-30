@@ -5,7 +5,8 @@
 ---
 
 ## Comments
-I'm converting this into single binary which works on cross platform to extract operating system information, return in yaml, json and string
+I'm converting this into single binary which works on cross platform to extract operating system information, return in yaml, json and string.
+This binary will help to my other workflows (ansible, GHA) or code to make decision
 
 ## Why `go-syslite`?
 
