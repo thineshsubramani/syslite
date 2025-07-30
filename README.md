@@ -1,12 +1,13 @@
-# go-syslite
+# syslite
 
-**`go-syslite`** is a lightweight Go module designed to quickly retrieve essential system information with minimal overhead. This module is tailored for developers who need fast, simple, and intuitive functions to check system details such as OS name, distribution, kernel version, and architecture. With built-in Boolean functions, **`go-syslite`** simplifies cross-platform development and CI/CD pipeline tasks.
+**`syslite`** is a lightweight Go module designed to quickly retrieve essential system information with minimal overhead. This module is tailored for developers who need fast, simple, and intuitive functions to check system details such as OS name, distribution, kernel version, and architecture. With built-in Boolean functions, **`syslite`** simplifies cross-platform development and CI/CD pipeline tasks.
 
 ---
 
 ## Comments
-I'm converting this into single binary which works on cross platform to extract operating system information, return in yaml, json and string.
-This binary will help to my other workflows (ansible, GHA) or code to make decision
+I'm converting this into single binary which works on cross platform to extract operating system information, return in yaml, json and env.
+This binary will help to my other workflows (ansible, GHA) or code to make decision. 
+Eg. Running this binary as part of worklow where it help to get more info and inject into GITHUB ENV of current runtime which will be useful for next steps decission making (if ENV.KERNEL_VERSION == 3.X)
 
 ## Why `go-syslite`?
 
