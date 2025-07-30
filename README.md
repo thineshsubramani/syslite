@@ -3,6 +3,12 @@
 Minimal system information extractor written in Go. (Trying my best to keep this lightweight)
 **Currently supports only YAML config-based execution.**
 
+```bash
+echo "You love Bash commands or script... Until you need 20 system infos, YAML configs and env injection."
+echo "Copy-pasting the same mess across repos makes you question your life."
+```
+
+
 ## Features
 
 * Extracts system data (based on configured fields)
