@@ -21,9 +21,11 @@ func main() {
 		case "json":
 			outputs.ToJSON(data, cfg.Output.JSONPath)
 		case "yaml":
-			outputs.ToYAML(data, cfg.Output.YAMLPath)
+			// implement ToYAML later
 		case "env":
 			outputs.ToEnv(data, cfg.Output.EnvTarget)
+		default:
+			log.Printf("unsupported format: %s", format)
 		}
 	}
 }
